@@ -17,11 +17,17 @@ int main( int argc, char **argv ) {
   edges = new_matrix(4, 4);
   transform = new_matrix(4, 4);
 
+  /*
   if ( argc == 2 )
     parse_file( argv[1], transform, edges, s );
   else
     parse_file( "stdin", transform, edges, s );
-  
+  */
+    
+  //transform = make_hermite();
+  //transform = make_bezier();
+  //transform = generate_curve_coefs(1,6,6,5,1);
+  print_matrix(transform);
   free_matrix( transform );
   free_matrix( edges );
 }  

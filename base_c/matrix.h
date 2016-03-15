@@ -28,8 +28,9 @@ struct matrix * make_rotY(double theta);
 struct matrix * make_rotZ(double theta);
 
 //curve routines
-struct matrix * make_bezier();
-struct matrix * make_hermite();
+struct matrix * make_bezier(); //made the hard code matrix, tested 3/15
+struct matrix * make_hermite();//made hard code, tested 3/15
 struct matrix * generate_curve_coefs( double p1, double p2,
 				      double p3, double p4, int type );
+//done, probably correct, put on hold, cannot test, 3/15
 #endif

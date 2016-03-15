@@ -29,9 +29,9 @@ void add_circle( struct matrix * points,
   double x0 = r*cos(0)+cx;
   double y0 = r*sin(0)+cy;
   while (t<1.001){
-    x1 = r*cos(t*2*PI)+cx;
-    y1 = r*cos(t*2*PI)+cy;
-    if (m->lastcol == m->col){
+    x1 = r*cos(t*2*M_PI)+cx;
+    y1 = r*cos(t*2*M_PI)+cy;
+    if (points->lastcol == points->cols){
     }
     points->m[0][i] = x0;
     points->m[1][i] = y0;
