@@ -17,7 +17,7 @@ void draw_lines( struct matrix * points, screen s, color c);
 void add_circle( struct matrix * points, 
 		 double cx, double cy, 
 		 double r, double step );
-//done, 11:45 AM, needs to be tested 1/14/16
+//done, 11:45 AM, needs to be tested 1/14/16, tested
 void add_curve( struct matrix *points, 
 		double x0, double y0,
 		double x1, double y1,

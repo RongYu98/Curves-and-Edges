@@ -30,21 +30,30 @@ void add_circle( struct matrix * points,
   double y0 = r*sin(0)+cy;
   while (t<1.001){
     x1 = r*cos(t*2*M_PI)+cx;
-    y1 = r*cos(t*2*M_PI)+cy;
+    y1 = r*sin(t*2*M_PI)+cy;
     if (points->lastcol == points->cols){
+      grow_matrix( points, points->lastcol+1 );
+      //points->lastcol += 1;
     }
-    points->m[0][i] = x0;
-    points->m[1][i] = y0;
-    points->m[2][i] = 0;
-    points->m[3][i] = 1;
+    points->m[0][points->lastcol] = x0;
+    points->m[1][points->lastcol] = y0;
+    points->m[2][points->lastcol] = 0;
+    points->m[3][points->lastcol] = 1;
     i++;
-      
-    points->m[0][i] = x1;
-    points->m[1][i] = y1;
-    points->m[2][i] = 0;
-    points->m[3][i] = 1;
-    i++;
+    points->lastcol++;
 
+    if (points->lastcol == points->cols){
+      grow_matrix( points, points->lastcol+1 );
+      //points->lastcol += 1;
+    }
+    points->m[0][points->lastcol] = x1;
+    points->m[1][points->lastcol] = y1;
+    points->m[2][points->lastcol] = 0;
+    points->m[3][points->lastcol] = 1;
+    i++;
+    points->lastcol++;
+    //printf("%d\n", points->lastcol);
+    
     x0=x1;
     y0=y1;
     t+=step;
@@ -78,6 +87,31 @@ void add_curve( struct matrix *points,
 		double x2, double y2, 
 		double x3, double y3, 
 		double step, int type ) {
+  struct matrix * Xs = generate_curve_coefs(x0, x1, x2, x3, type);
+  struct matrix * Ys = generate_curve_coefs(y0, y1, y2, y3, type);
+
+  int//////////////////
+  int x;
+  int y;
+  int t = 0;
+  while (t<1){
+
+    if (points->lastcol == points->cols){
+      grow_matrix( points, points->lastcol+1 );
+    }
+    
+    //x = t * ( t * (a*t + b) + c) + d;
+    x = t * ( t * ( Xs->m[0][0] *t + Xs->m[0][1]) + Xs->m[0][2]) + Xs->m[0][3];
+    
+    //y = t * ( t * (a*t + b) + c) + d;
+    y = t * ( t * ( Ys->m[0][0] *t + Ys->m[0][1]) + Ys->m[0][2]) + Ys->m[0][3];
+
+    points->m[
+    
+    t+= step;
+
+    //add_edge( points, x,y);
+  }
 }
 
 /*======== void add_point() ==========

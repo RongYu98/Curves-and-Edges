@@ -353,7 +353,7 @@ struct matrix * generate_curve_coefs( double p1, double p2,
   m->m[1][0] = p2;
   m->m[2][0] = p3;
   m->m[3][0] = p4;
-
+  
   struct matrix * multi;
   if (type == HERMITE_MODE){ //0
     multi = make_hermite();
