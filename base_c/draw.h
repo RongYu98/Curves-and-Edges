@@ -24,4 +24,5 @@ void add_curve( struct matrix *points,
 		double x2, double y2,
 		double x3, double y3,
 		double step, int type );
+//done
 #endif

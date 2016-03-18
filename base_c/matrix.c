@@ -83,6 +83,7 @@ void print_matrix(struct matrix *m) {
     for (j=0; j < m->cols; j++) 
       printf("%f ", m->m[i][j]);
     printf("\n");
+    printf("\n");
   }
 }
 
@@ -362,7 +363,6 @@ struct matrix * generate_curve_coefs( double p1, double p2,
   }
 
   matrix_mult( multi, m );
-  
   return m;
 }
 

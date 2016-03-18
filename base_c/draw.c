@@ -89,28 +89,59 @@ void add_curve( struct matrix *points,
 		double step, int type ) {
   struct matrix * Xs = generate_curve_coefs(x0, x1, x2, x3, type);
   struct matrix * Ys = generate_curve_coefs(y0, y1, y2, y3, type);
+  print_matrix( Ys );
+  print_matrix( Xs );
+  
+  int i=0;
+  int X1;
+  int Y1;
+  int X0;
+  int Y0;
+  double t = 0;
 
-  int//////////////////
-  int x;
-  int y;
-  int t = 0;
-  while (t<1){
+  //x = t * ( t * (a*t + b) + c) + d;
+  X0 = x0;
+  
+  //y = t * ( t * (a*t + b) + c) + d;
+  Y0 = y0;
+  
+  
+  while (t<1.001){
 
     if (points->lastcol == points->cols){
       grow_matrix( points, points->lastcol+1 );
     }
+    //add_edges
+    points->m[0][i] = X0;
+    points->m[1][i] = Y0;
+    points->m[2][i] = 0;
+    points->m[3][i] = 1;
+    i++;
+    points->lastcol++;
+    
     
     //x = t * ( t * (a*t + b) + c) + d;
-    x = t * ( t * ( Xs->m[0][0] *t + Xs->m[0][1]) + Xs->m[0][2]) + Xs->m[0][3];
-    
     //y = t * ( t * (a*t + b) + c) + d;
-    y = t * ( t * ( Ys->m[0][0] *t + Ys->m[0][1]) + Ys->m[0][2]) + Ys->m[0][3];
+    
+    
+    X1 = t * ( t * ( Xs->m[0][0] *t + Xs->m[1][0]) + Xs->m[2][0]) + Xs->m[3][0];
+    Y1 = t * ( t * ( Ys->m[0][0] *t + Ys->m[1][0]) + Ys->m[2][0]) + Ys->m[3][0];
 
-    points->m[
+    if (points->lastcol == points->cols){
+      grow_matrix( points, points->lastcol+1 );
+    }
+    points->m[0][i] = X1;
+    points->m[1][i] = Y1;
+    points->m[2][i] = 0;
+    points->m[3][i] = 1;
+    i++;
+    points->lastcol++;
+    
+    X0 = X1;
+    Y0 = Y1;
     
     t+= step;
 
-    //add_edge( points, x,y);
   }
 }
 
