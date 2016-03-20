@@ -85,7 +85,7 @@ void parse_file ( char * filename,
   c.green = 10;
 
   double step = 100;
-  double x0,y0,z0,x1,y1,z1,x2,y2,z2
+  double x0,y0,z0,x1,y1,z1,x2,y2,x3,y3;
   double theta;
   double cx,cy,r;
   double sx, sy,sz;
@@ -95,56 +95,56 @@ void parse_file ( char * filename,
     if ( strcmp(line, "line") == 0 ){
       fgets(line, 255, f);
       line[strlen(line)-1]='\0';
-      sscanf(line, "%f %f %f %f %f %f", &x0,&y0,&z0,&x1,&y1,&z1);
+      sscanf(line, "%lf %lf %lf %lf %lf %lf", &x0,&y0,&z0,&x1,&y1,&z1);
       add_edge(pm,x0,y0,z0,x1,y1,z1);
     }else if ( strcmp(line, "circle") == 0 ){
       line[strlen(line)-1]='\0'; 
-      sscanf(line,"%f %f %f",&cx,&cy,&r);
+      sscanf(line,"%lf %lf %lf",&cx,&cy,&r);
       add_circle(pm,cx,cy,r,step);
     } else if ( strcmp(line, "hermite") == 0 ){
       fgets(line,255, f);
       line[strlen(line)-1]='\0';
-      sscanf(line,"%f %f %f %f %f %f %f %f",&x0,&y0,&x1,&y1,&x2,&y2,&x3,&y3);
+      sscanf(line,"%lf %lf %lf %lf %lf %lf %lf %lf",&x0,&y0,&x1,&y1,&x2,&y2,&x3,&y3);
       add_curve(pm,x0,y0,x1,y1,x2,y2,x3,y3,step,HERMITE_MODE);
-    }else if ( strcmp(line, "bezeir") == 0 ){
+    }else if ( strcmp(line, "bezier") == 0 ){
         fgets(line,255, f);
       line[strlen(line)-1]='\0';
-      sscanf(line,"%f %f %f %f %f %f %f %f",&x0,&y0,&x1,&y1,&x2,&y2,&x3,&y3);
-      add_curve(pm,x0,y0,x1,y1,x2,y2,x3,y3,step,BEZEIR_MODE);
+      sscanf(line,"%lf %lf %lf %lf %lf %lf %lf %lf",&x0,&y0,&x1,&y1,&x2,&y2,&x3,&y3);
+      add_curve(pm,x0,y0,x1,y1,x2,y2,x3,y3,step,BEZIER_MODE);
     }else if ( strcmp(line, "ident") == 0 ){
       ident(transform);
     }else if ( strcmp(line, "scale") == 0 ){
       fgets(line,255, f);
       line[strlen(line)-1]='\0';
-      sscanf(line,"%f %f %f",&sx,&sy,&sz);
+      sscanf(line,"%lf %lf %lf",&sx,&sy,&sz);
       struct matrix *scale = make_scale(sx,sy,sz);
       matrix_mult(scale,transform);
       free_matrix(scale);  
     }else if ( strcmp(line, "translate") == 0 ){
       fgets(line,255, f);
       line[strlen(line)-1]='\0'; 
-      sscanf(line,"%f %f %lf",&tx,&ty,&tz);
+      sscanf(line,"%lf %lf %lf",&tx,&ty,&tz);
       struct matrix *translate = make_translate(tx,ty,tz);
       matrix_mult(translate,transform);
       free_matrix(translate);
     }else if ( strcmp(line, "xrotate") == 0 ){
       fgets(line,255, f);
       line[strlen(line)-1]='\0';
-      sscanf(line,"%f",&theta);
+      sscanf(line,"%lf",&theta);
       struct matrix *rotate_X = make_rotX( (theta/180.)*M_PI );
       matrix_mult(rotate_X,transform);
       free_matrix(rotate_X);
     }else if ( strcmp(line, "yrotate") == 0 ){
       fgets(line,255, f);
       line[strlen(line)-1]='\0';
-      sscanf(line,"%f",&theta);
+      sscanf(line,"%lf",&theta);
       struct matrix *rotate_Y = make_rotY( (theta/180.)*M_PI);
       matrix_mult(rotate_Y,transform);
       free_matrix(rotate_Y);
     }else if ( strcmp(line, "zrotate") == 0 ){
       fgets(line,255, f);
       line[strlen(line)-1]='\0';
-      sscanf(line,"%f",&theta);
+      sscanf(line,"%lf",&theta);
       struct matrix *rotate_Z = make_rotZ( (theta/180.)*M_PI);
       matrix_mult(rotate_Z,transform);
       free_matrix(rotate_Z);
@@ -159,7 +159,7 @@ void parse_file ( char * filename,
       draw_lines(pm,s,c);
       save_extension(s,line);  
     }else if ( strcmp(line, "quit") == 0 ){
-      exit();
+      exit(0);
     }    
   }
 }

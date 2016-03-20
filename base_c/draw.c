@@ -87,19 +87,22 @@ void add_curve( struct matrix *points,
 		double x2, double y2, 
 		double x3, double y3, 
 		double step, int type ) {
+  struct matrix* Xs;
+  struct matrix* Ys;
+  
   if (HERMITE_MODE){
-    struct matrix * Xs = generate_curve_coefs(x0, x1, x2, x3, type);
-    struct matrix * Ys = generate_curve_coefs(y0, y1, y2, y3, type);
+    Xs = generate_curve_coefs(x0, x1, x2, x3, type);
+    Ys = generate_curve_coefs(y0, y1, y2, y3, type);
   }  
-  else if (BEZEIR_MODE){
-    struct matrix * Xs = generate_curve_coefs(x0, x2, x1-x0, x2-x3, type);
-    struct matrix * Ys = generate_curve_coefs(y0, y2, y1-y0, y2-y3, type);
+  else if (BEZIER_MODE){
+    Xs = generate_curve_coefs(x0, x2, x1-x0, x2-x3, type);
+    Ys = generate_curve_coefs(y0, y2, y1-y0, y2-y3, type);
   }
 
   //print_matrix( Ys );
   //print_matrix( Xs );
   
-  int i=0;
+  //int i=0;
   int X1;
   int Y1;
   int X0;
@@ -124,9 +127,11 @@ void add_curve( struct matrix *points,
     points->m[2][i] = 0;
     points->m[3][i] = 1;
     */
-    i++;
-    points->lastcol++;
-    
+    //printf("%f\n",t);
+    //i++;
+    //points->lastcol++;
+
+    printf("hi %f\n",t);
     
     //x = t * ( t * (a*t + b) + c) + d;
     //y = t * ( t * (a*t + b) + c) + d;
@@ -134,7 +139,7 @@ void add_curve( struct matrix *points,
     X1 = t * ( t * ( Xs->m[0][0] *t + Xs->m[1][0]) + Xs->m[2][0]) + Xs->m[3][0];
     Y1 = t * ( t * ( Ys->m[0][0] *t + Ys->m[1][0]) + Ys->m[2][0]) + Ys->m[3][0];
     
-    add_edge(points,x0,y0,0,x1,y1,0)
+    add_edge(points,X0,Y0,0,X1,Y1,0);
     
     /*
     if (points->lastcol == points->cols){
@@ -145,8 +150,8 @@ void add_curve( struct matrix *points,
     points->m[2][i] = 0;
     points->m[3][i] = 1;
     */
-    i++;
-    points->lastcol++;
+    //i++;
+    //points->lastcol++;
     
     X0 = X1;
     Y0 = Y1;
