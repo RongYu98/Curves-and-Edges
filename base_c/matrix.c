@@ -275,7 +275,7 @@ struct matrix * make_rotZ(double theta) {
 struct matrix * make_bezier() {
   struct matrix * m = new_matrix(4,4);
   ident(m);
-  m->m[0][0] = 1;
+  m->m[0][0] = -1;
   m->m[0][1] = 3;
   m->m[0][2] = -3;
   m->m[0][3] = 1;
