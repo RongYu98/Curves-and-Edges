@@ -92,6 +92,7 @@ void parse_file ( char * filename,
   double tx,ty,tz;
   while ( fgets(line, 255, f) != NULL ) {
     line[strlen(line)-1]='\0';
+    printf("%s\n",line);
     if ( strcmp(line, "line") == 0 ){
       fgets(line, 255, f);
       line[strlen(line)-1]='\0';
@@ -155,9 +156,9 @@ void parse_file ( char * filename,
       display(s);
     }else if ( strcmp(line, "save") == 0 ){
       fgets(line,255, f);
-      line[strlen(line)-1]='\0';
+      line[strlen(line)]='\0';
       draw_lines(pm,s,c);
-      save_extension(s,line);  
+      save_extension(s,line);
     }else if ( strcmp(line, "quit") == 0 ){
       exit(0);
     }    
