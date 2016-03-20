@@ -33,12 +33,11 @@ int main( int argc, char **argv ) {
 
   //printf("HI\n");
   
-  /*
+  
   if ( argc == 2 )
     parse_file( argv[1], transform, edges, s );
   else
     parse_file( "stdin", transform, edges, s );
-  */
 
   //printf("1\n");
 
