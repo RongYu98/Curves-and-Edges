@@ -1,2 +1,0 @@
-add_curve in draw.c
-parser
