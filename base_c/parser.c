@@ -84,7 +84,7 @@ void parse_file ( char * filename,
   c.blue = 100;
   c.green = 10;
 
-  double step = 100;
+  double step = .05;
   double x0,y0,z0,x1,y1,z1,x2,y2,x3,y3;
   double theta;
   double cx,cy,r;

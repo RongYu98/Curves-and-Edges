@@ -121,6 +121,7 @@ void add_curve( struct matrix *points,
   while (t<1.001){
 
     printf("hi %f\n",t);
+    printf("%f\n",step);
     
     //x = t * ( t * (a*t + b) + c) + d;
     //y = t * ( t * (a*t + b) + c) + d;
