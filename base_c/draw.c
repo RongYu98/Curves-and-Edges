@@ -90,11 +90,11 @@ void add_curve( struct matrix *points,
   struct matrix* Xs;
   struct matrix* Ys;
   
-  if (BEZIER_MODE){
+  if (HERMITE_MODE){
     Xs = generate_curve_coefs(x0, x1, x2, x3, type);
     Ys = generate_curve_coefs(y0, y1, y2, y3, type);
   }  
-  else if (HERMITE_MODE){
+  else if (BEZIER_MODE){
     Xs = generate_curve_coefs(x0, x2, x1-x0, x2-x3, type);
     Ys = generate_curve_coefs(y0, y2, y1-y0, y2-y3, type);
   }
@@ -117,19 +117,6 @@ void add_curve( struct matrix *points,
   
   
   while (t<1.001){
-    /*
-    if (points->lastcol == points->cols){
-      grow_matrix( points, points->lastcol+1 );
-    } //add_lines does this
-    //add_edges
-    points->m[0][i] = X0;
-    points->m[1][i] = Y0;
-    points->m[2][i] = 0;
-    points->m[3][i] = 1;
-    */
-    //printf("%f\n",t);
-    //i++;
-    //points->lastcol++;
 
     printf("hi %f\n",t);
     
@@ -150,7 +137,6 @@ void add_curve( struct matrix *points,
     points->m[2][i] = 0;
     points->m[3][i] = 1;
     */
-    //i++;
     //points->lastcol++;
     
     X0 = X1;
