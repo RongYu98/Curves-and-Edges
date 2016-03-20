@@ -32,7 +32,7 @@ int main( int argc, char **argv ) {
   //display(s);
 
   //printf("HI\n");
-  
+
   
   if ( argc == 2 )
     parse_file( argv[1], transform, edges, s );
