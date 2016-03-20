@@ -99,11 +99,9 @@ void parse_file ( char * filename,
       sscanf(line, "%lf %lf %lf %lf %lf %lf", &x0,&y0,&z0,&x1,&y1,&z1);
       add_edge(pm,x0,y0,z0,x1,y1,z1);
     }else if ( strcmp(line, "circle") == 0 ){
-      fgets(line, 255, f);
       line[strlen(line)-1]='\0'; 
       sscanf(line,"%lf %lf %lf",&cx,&cy,&r);
       printf("%f\n",r);
-      printf("[%s]\n",line);
       add_circle(pm,cx,cy,r,step);
     } else if ( strcmp(line, "hermite") == 0 ){
       fgets(line,255, f);

@@ -55,12 +55,14 @@ void add_circle( struct matrix * points,
     points->lastcol++;
     //printf("%d\n", points->lastcol);
     */
+    
     add_edge(points, x0,y0,0,x1,y1,0);
     x0=x1;
     y0=y1;
     t+=step;
-    printf("%f\n",t);
+    //printf("%f\n",t);
   }
+  print_matrix(points);
 }
 
 /*======== void add_curve() ==========
