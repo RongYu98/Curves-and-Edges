@@ -25,13 +25,13 @@ int main( int argc, char **argv ) {
   add_curve(edges, 150, 150, 150, 50, 350, 150, 350, 300, .1, HERMITE_MODE);
   printf("HI\n");
   draw_lines(edges, s, c);
-  //add_curve(edges, 200, 250, 150, 50, 300, 250, 300, 250, .1, BEZIER_MODE);
-  //draw_lines(edges, s, c);
+  add_curve(edges, 200, 250, 150, 50, 300, 250, 300, 250, .1, BEZIER_MODE);
+  draw_lines(edges, s, c);
   save_extension(s, "lines.png");
   print_matrix(edges);
   display(s);
 
-  printf("HI\n");
+  //printf("HI\n");
   
   /*
   if ( argc == 2 )
