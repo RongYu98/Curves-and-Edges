@@ -59,6 +59,7 @@ void add_circle( struct matrix * points,
     x0=x1;
     y0=y1;
     t+=step;
+    printf("%f\n",t);
   }
 }
 
@@ -121,7 +122,7 @@ void add_curve( struct matrix *points,
   while (t<1.001){
 
     printf("hi %f\n",t);
-    printf("%f\n",step);
+    //printf("%f\n",step);
     
     //x = t * ( t * (a*t + b) + c) + d;
     //y = t * ( t * (a*t + b) + c) + d;
